@@ -113,3 +113,81 @@ console.log(formatValue("  Hello World    ")); // "Hello World"
 console.log(formatValue(42)); // "42"
 //console.log(formatValue(true)); // Error: Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
 
+
+// =============================================================================================================
+// Conditional Types with Union Types
+
+type IsString<T> = T extends string ? true : false;
+
+type Result1 = IsString<string>; // true;
+type Result2 = IsString<number>; // false;
+type Result3 = IsString<"Hello">; // true;
+
+type Result4 = IsString<string | number>; // true | false; (distributive conditional type)
+
+// Distributed conditional types
+type Nullable<T> = T | null | undefined;
+type NotNullable<T> = T extends null | undefined ? never : T;
+
+type NullableString = Nullable<string>; // string | null | undefined
+type NotNullableString = NotNullable<string | number | null | undefined>; // string
+
+
+// Mapped Types with Union Types
+
+type RequiredProperties = "id" | "name" ;
+type UserProps = "id" | "name" | "age" | "email";
+
+type User = {
+    [K in UserProps]: K extends RequiredProperties ? {required: true} : {required : false};
+}
+
+// Creates:
+// {
+//   id: { required: true },
+//   name: { required: true },
+//   email: { required: false },
+//   age: { required: false }
+// }
+
+
+// =======================================================================================================================
+
+// Event system with union types
+type MouseEventProp = {
+    type: "click" | "dblclick" | "mousemove" | "mousedown" | "mouseup";
+    target: HTMLElement;
+    position: {
+        x: number;
+        y: number;
+    }
+}
+
+type KeyboardEventProp = {
+    type: "keydown" | "keyup" | "keypress";
+    key: string;
+    modifiers: { 
+        ctrl: boolean;
+        shift: boolean
+    }
+}
+
+
+type UserEvent = MouseEvent  | KeyboardEvent | { type: "focus"; target: HTMLElement } | { type: "blur"; target: HTMLElement };
+
+function handleUserEvents(event: UserEvent) {
+  // Common property check
+  console.log(`Event type: ${event.type}`);
+  
+//   // Type-specific handling
+//   if (event.type === "click" || event.type === "mousedown" || event.type === "mouseup") {
+//     // TypeScript knows event is MouseEvent here
+//     console.log(`Mouse position: ${event.position.x | event.getModifierState.ctrl}, ${event.position.y}`);
+//   } else if (event.type === "keydown" || event.type === "keyup" || event.type === "keypress") {
+//     // TypeScript knows event is KeyboardEvent here
+//     console.log(`Key pressed: ${event.key}`);
+//     if (event.modifiers.ctrl) {
+//       console.log("Ctrl was pressed");
+//     }
+//   }
+}

@@ -43,4 +43,18 @@ function formatValue(value) {
 }
 console.log(formatValue("  Hello World    ")); // "Hello World"
 console.log(formatValue(42)); // "42"
-//console.log(formatValue(true)); // Error: Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+function handleUserEvents(event) {
+    // Common property check
+    console.log("Event type: ".concat(event.type));
+    //   // Type-specific handling
+    //   if (event.type === "click" || event.type === "mousedown" || event.type === "mouseup") {
+    //     // TypeScript knows event is MouseEvent here
+    //     console.log(`Mouse position: ${event.position.x | event.getModifierState.ctrl}, ${event.position.y}`);
+    //   } else if (event.type === "keydown" || event.type === "keyup" || event.type === "keypress") {
+    //     // TypeScript knows event is KeyboardEvent here
+    //     console.log(`Key pressed: ${event.key}`);
+    //     if (event.modifiers.ctrl) {
+    //       console.log("Ctrl was pressed");
+    //     }
+    //   }
+}
