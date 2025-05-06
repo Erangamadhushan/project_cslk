@@ -45,6 +45,7 @@ A huge thanks to these amazing developers who contributed their time and skills 
 - [**Chamod Anjana**](https://github.com/ChamodAnjana)
 - [**LK-BL**](https://github.com/lk-bl)
 - [**UC_Charith**](https://github.com/UChariTh)
+- [**Erangamadhushan**](https://github.com/Erangamadhushan)
 - And many more!
 
 Want to see all the contributors? Check out the full list on the [Contributors page](https://github.com/pasindusampath/project_cslk/graphs/contributors).
